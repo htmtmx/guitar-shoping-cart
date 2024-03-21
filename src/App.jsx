@@ -1,8 +1,10 @@
 
+import { Header } from "./components"
 function App() {
 
   return (
     <>
+      
       <header className="py-5 header">
         <div className="container-xl">
           <div className="row justify-content-center justify-content-md-between">
@@ -75,6 +77,7 @@ function App() {
       </header>
 
       <main className="container-xl mt-5">
+        <Header />
         <h2 className="text-center">Nuestra Colección</h2>
 
         <div className="row mt-5">
@@ -255,12 +258,12 @@ function App() {
         </div>
       </main>
 
-
       <footer className="bg-dark mt-5 py-5">
         <div className="container-xl">
           <p className="text-white text-center fs-4 mt-4 m-md-0">GuitarLA - Todos los derechos Reservados</p>
         </div>
       </footer>
+
     </>
   )
 }
