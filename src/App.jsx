@@ -1,14 +1,20 @@
 import { useState, useEffect } from "react";
-import { Header, ItemShop } from "./components"
-import { db } from "./data/db"
+import { Header, ItemShop } from "./components";
+import { db } from "./data/db";
 function App() {
   const [data, setData] = useState([]);
+
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     if (db) {
       setData(db);
     }
   }, []);
+
+  useEffect(() => {
+    console.log('Carrito: ',cart);
+  },[cart]);
 
   return (
     <>
@@ -18,10 +24,12 @@ function App() {
 
         <div className="row mt-5">
           {
-            data.map(item =>
+            data.map(guitar =>
               <ItemShop
-                key={item.id}
-                item={item}
+                key={guitar.id}
+                guitar={guitar}
+                cart={cart}
+                setCart={setCart}
               />
             )
           }
@@ -37,7 +45,7 @@ function App() {
       </footer>
 
     </>
-  )
+  );
 }
 
-export default App
+export default App;

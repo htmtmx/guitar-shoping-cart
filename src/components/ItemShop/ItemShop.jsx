@@ -1,5 +1,12 @@
-export default function ItemShop({ item }) {
-  const { id, name, image, description, price } = item;
+export default function ItemShop({ guitar, cart, setCart }) {
+
+  const { id, name, image, description, price } = guitar;
+  
+  const addItemToCart = (guitar) => {
+    setCart(cart => [...cart, guitar]);
+  };
+  
+
   return (
     <div className="col-md-6 col-lg-4 my-4 row align-items-center">
       <div className="col-4">
@@ -13,6 +20,7 @@ export default function ItemShop({ item }) {
         <button
           type="button"
           className="btn btn-dark w-100"
+          onClick={()=>addItemToCart(guitar)}
         >Agregar al Carrito</button>
       </div>
     </div>
