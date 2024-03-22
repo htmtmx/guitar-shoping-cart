@@ -3,11 +3,10 @@ import { Header, ItemShop } from "./components"
 import { db } from "./data/db"
 function App() {
   const [data, setData] = useState([]);
-  
+
   useEffect(() => {
     if (db) {
       setData(db);
-      console.log(data);
     }
   }, []);
 
@@ -18,7 +17,16 @@ function App() {
         <h2 className="text-center">Nuestra Colección</h2>
 
         <div className="row mt-5">
-          <ItemShop />
+          {
+            data.map(item =>
+              <ItemShop
+                key={item.id}
+                item={item}
+              />
+            )
+          }
+
+
         </div>
       </main>
 
