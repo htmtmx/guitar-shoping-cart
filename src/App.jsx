@@ -24,7 +24,6 @@ function App() {
               <ItemShop
                 key={guitar.id}
                 guitar={guitar}
-                cart={cart}
                 setCart={setCart}
               />
             )
