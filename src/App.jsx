@@ -1,7 +1,15 @@
-
-import { Header } from "./components"
-import { ItemShop } from "./components"
+import { useState, useEffect } from "react";
+import { Header, ItemShop } from "./components"
+import { db } from "./data/db"
 function App() {
+  const [data, setData] = useState([]);
+  
+  useEffect(() => {
+    if (db) {
+      setData(db);
+      console.log(data);
+    }
+  }, []);
 
   return (
     <>
