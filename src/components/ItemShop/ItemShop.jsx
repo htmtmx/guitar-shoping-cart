@@ -2,15 +2,9 @@ export default function ItemShop({ guitar, cart, setCart }) {
 
   const { id, name, image, description, price } = guitar;
   
-  const addItemToCart = (guitar) => {
-    setCart(cart => [...cart, guitar]);
-  };
-  
-
   return (
     <div className="col-md-6 col-lg-4 my-4 row align-items-center">
       <div className="col-4">
-        {/* <h1>{dataItem}</h1> */}
         <img className="img-fluid" src={`/img/${image}.jpg`} alt="imagen guitarra" />
       </div>
       <div className="col-8">
@@ -20,7 +14,7 @@ export default function ItemShop({ guitar, cart, setCart }) {
         <button
           type="button"
           className="btn btn-dark w-100"
-          onClick={()=>addItemToCart(guitar)}
+          onClick={() => setCart(cart => [...cart, guitar])}
         >Agregar al Carrito</button>
       </div>
     </div>

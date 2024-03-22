@@ -12,10 +12,6 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    console.log('Carrito: ',cart);
-  },[cart]);
-
   return (
     <>
       <Header />
