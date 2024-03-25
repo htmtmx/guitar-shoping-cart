@@ -12,6 +12,19 @@ function App() {
     }
   }, []);
 
+  function addToCart(item) {
+    const itemExists = cart.findIndex(guitar => guitar.id === item.id);
+    console.log(itemExists);
+    if (itemExists === -1) {
+      item.quantity = 1;
+      setCart(prevItem => [...prevItem, item]);
+    } else if (itemExists >= 0) {
+      const updatedCart = [...cart];
+      updatedCart[item].quantity++;
+      setCart(updatedCart);
+    }
+  }
+
   return (
     <>
       <Header />
@@ -24,7 +37,7 @@ function App() {
               <ItemShop
                 key={guitar.id}
                 guitar={guitar}
-                setCart={setCart}
+                addToCart={addToCart}
               />
             )
           }
