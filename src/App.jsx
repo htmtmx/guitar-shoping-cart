@@ -13,21 +13,20 @@ function App() {
   }, []);
 
   function addToCart(item) {
-    const itemExists = cart.findIndex(guitar => guitar.id === item.id);
-    console.log(itemExists);
-    if (itemExists === -1) {
+    const idItemExists = cart.findIndex(guitar => guitar.id === item.id);
+    if (idItemExists === -1) {
       item.quantity = 1;
-      setCart(prevItem => [...prevItem, item]);
-    } else if (itemExists >= 0) {
+      setCart([...cart, item]);
+    } else if (idItemExists >= 0) {
       const updatedCart = [...cart];
-      updatedCart[item].quantity++;
+      updatedCart[idItemExists].quantity++;
       setCart(updatedCart);
     }
   }
 
   return (
     <>
-      <Header />
+      <Header cart={cart} />
       <main className="container-xl mt-5">
         <h2 className="text-center">Nuestra Colección</h2>
 
