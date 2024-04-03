@@ -2,6 +2,21 @@
 import PropTypes from "prop-types";
 export default function Header({ cart, setCart }) {
 
+  const handleClick = (guitarId, opt) => {
+    const updatedCart = [...cart];
+    const idGuitar = cart.findIndex(guitar => guitar.id === guitarId);
+    if (opt === 1) {
+      updatedCart[idGuitar].quantity--;
+    } else if (opt === 2) {
+      updatedCart[idGuitar].quantity++;
+    } else if (opt === 3) {
+      updatedCart.splice(idGuitar);
+    }
+    if (updatedCart[idGuitar].quantity === 0) {
+      updatedCart.splice(idGuitar);
+    }
+    setCart(updatedCart);
+  };
 
   return (
     <header className="py-5 header">
@@ -48,6 +63,7 @@ export default function Header({ cart, setCart }) {
                               <button
                                 type="button"
                                 className="btn btn-dark"
+                                onClick={()=> handleClick(item.id, 1)}
                               >
                                 -
                               </button>
@@ -55,6 +71,8 @@ export default function Header({ cart, setCart }) {
                               <button
                                 type="button"
                                 className="btn btn-dark"
+                                onClick={
+                                  () => handleClick(item.id, 2)}
                               >
                                 +
                               </button>
@@ -63,6 +81,7 @@ export default function Header({ cart, setCart }) {
                               <button
                                 className="btn btn-danger"
                                 type="button"
+                                onClick={()=> handleClick(item.id, 3)}
                               >
                                 X
                               </button>
@@ -73,8 +92,10 @@ export default function Header({ cart, setCart }) {
                     </table>
                     
                     <p className="text-end">Total pagar: <span className="fw-bold">
+                      {cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}
                     </span></p>
                     <button className="btn btn-dark w-100 mt-3 p-2"
+                      onClick={()=> setCart([])}
                     >Vaciar Carrito</button>
                   </div>
                   }  
