@@ -3,18 +3,19 @@ import PropTypes from "prop-types";
 export default function Header({ cart, setCart }) {
 
   const handleClick = (guitarId, opt) => {
-    const updatedCart = [...cart];
     const idGuitar = cart.findIndex(guitar => guitar.id === guitarId);
+    const updatedCart = [...cart];
     if (opt === 1) {
       updatedCart[idGuitar].quantity--;
+      if (updatedCart[idGuitar].quantity === 0) {
+        updatedCart.splice(idGuitar, 1);
+      }
     } else if (opt === 2) {
       updatedCart[idGuitar].quantity++;
     } else if (opt === 3) {
-      updatedCart.splice(idGuitar);
+      updatedCart.splice(idGuitar,1);
     }
-    if (updatedCart[idGuitar].quantity === 0) {
-      updatedCart.splice(idGuitar);
-    }
+
     setCart(updatedCart);
   };
 
@@ -49,13 +50,13 @@ export default function Header({ cart, setCart }) {
                         </tr>
                       </thead>
                       <tbody>
-                        {cart.map(item => 
+                        {cart.map(item =>
                           <tr key={item.id}>
                             <td>
                               <img className="img-fluid" src={`/img/${item.image}.jpg`} alt=" Imagen Guitarra " />
                             </td>
                             <td>{item.name}</td>
-                          
+
                             <td className="fw-bold">
                               ${item.price}
                             </td>
@@ -63,7 +64,7 @@ export default function Header({ cart, setCart }) {
                               <button
                                 type="button"
                                 className="btn btn-dark"
-                                onClick={()=> handleClick(item.id, 1)}
+                                onClick={() => handleClick(item.id, 1)}
                               >
                                 -
                               </button>
@@ -81,7 +82,7 @@ export default function Header({ cart, setCart }) {
                               <button
                                 className="btn btn-danger"
                                 type="button"
-                                onClick={()=> handleClick(item.id, 3)}
+                                onClick={() => handleClick(item.id, 3)}
                               >
                                 X
                               </button>
@@ -90,15 +91,15 @@ export default function Header({ cart, setCart }) {
                         )}
                       </tbody>
                     </table>
-                    
+
                     <p className="text-end">Total pagar: <span className="fw-bold">
-                      {cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}
+                      ${cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}
                     </span></p>
                     <button className="btn btn-dark w-100 mt-3 p-2"
-                      onClick={()=> setCart([])}
+                      onClick={() => setCart([])}
                     >Vaciar Carrito</button>
                   </div>
-                  }  
+                }
               </div>
             </div>
           </nav>
